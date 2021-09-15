@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,17 +16,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Switch, Route, Link, BrowserRouter} from "react-router-dom";
 import Search from "./Search";
-import Home from "./Home";
-import SignIn from "../login/SignIn";
-import SignUp from "../register/SignUp";
-import Footer from "./Footer";
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import Button from '@material-ui/core/Button';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import RentalForm from "../Rentals/RentalForm";
-import RentalDetail from "../Rentals/RentalDetail";
-import RentalManage from "../Rentals/RentalManage";
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
@@ -35,6 +28,22 @@ import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import InfoIcon from '@material-ui/icons/Info';
 import Info from "./Info";
+import Home from "./Home";
+// import SignIn from "../login/SignIn";
+// import SignUp from "../register/SignUp";
+import Footer from "./Footer";
+import RentalF from "../Rentals/RentalF";
+import RentalDetail from "../Rentals/RentalDetail";
+import RentalManage from "../Rentals/RentalManage";
+import { useDispatch } from "react-redux";
+import {getRentals} from '../../actions/rentals'
+import { Avatar } from "@material-ui/core";
+import Auth from "../Auth/Auth";
+import { useHistory, useLocation } from 'react-router-dom';
+
+import * as actionType from '../../constants/actionTypes';
+// import { signin, signup } from '../../actions/auth';
+
 
 
 const drawerWidth = 240;
@@ -43,12 +52,17 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     flexGrow:1,
-    backgroundColor:'skyblue'
+    backgroundColor:'#F0E5CF',
+    // backgroundImage:'url('
+
+
   
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
       flexShrink: 1,
+      color:'#fff',
+
     
     }
   },
@@ -56,55 +70,96 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
     // [theme.breakpoints.up("sm")]: {
     //   display: "none"
+    color:'#fff'
     // }
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
     marginTop:60,
-    color:'text.secondary',
+    // backgroundColor:'#14274E',
     marginLeft:10,
     paddingLeft:20,
     borderRadius:10,
     paddingBottom:10,
+
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
-  },
-  btn:{
-    float:"left"
-  
+    padding: theme.spacing(0)
   },
     title:{
       flexGrow:1,
     },
   
     appBar:{
-      backgroundColor:'skyblue'
-    }
-
+      backgroundColor:'#14274E',
+      
+    },
+    
+    profile: {
+      display: 'flex',
+      // justifyContent: 'space-between',
+      width: '160px',
+    },
+    userName: {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    brandContainer: {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    
 }));
 
 function ResponsiveDrawer(props) {
+
+  
+  const dispatch = useDispatch();
   const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [Open, setOpen] = React.useState(false);
+  const history = useHistory();
+  // const location = useLocation();
+
 
   const handleDrawerToggle = () => {
     setOpen(!Open);
   };
 
+  const [user,setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+
+  
+  useEffect(() => {
+    const token = user?.token;
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  }, []);
+
+
+
+  const logout = () => {
+    localStorage.clear();
+       
+    setUser(null);
+  };
+
+  useEffect(()=>{
+    dispatch(getRentals());
+  },[dispatch]);
+
+  
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider  />
-      <List>
-        {[ "Home","Search","RentalForm","RentalManage","SignIn","SignUp","ContactUs","Info"].map((text, index) => (
+      <List className={classes.nav}>
+        {[ "Home","Search","RentalF","RentalManage","ContactUs","Info"].map((text, index) => (
           <ListItem key={text} component={Link} to={"/" + text}>
             <ListItemIcon>
-              {index  === 0 && <HomeIcon/>}
+              {index  === 0 && <HomeIcon />}
               {index  === 1 && <SearchIcon/>}
               {index  === 2 && <AddCircleOutlineIcon/>}
               {index  === 3 && <FormatAlignCenterIcon/>}
@@ -137,10 +192,26 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" className={classes.title}>
             NextHome 
           </Typography>
-          <NotificationsIcon />
 
-          <Button className={classes.btn} variant="h6" href="/SignIn"  color="inherit">Login</Button>
+          {/* <Typography >
+         <NotificationsIcon />
+         </Typography> */}
+         <div className={classes.profile}>
+            {user ? (
+                <div className={classes.profile}>
+                  {/* <Avatar className={classes.purple } alt={user.result.imageUrl} >{user.result.name.charAt(0)}</Avatar> */}
+                  <div className={classes.userName} variant="h6">{user.result.name}</div>
+                  <Button  variant="outlined" size='small' color="inherit"  onClick={logout} >Logout</Button>
+                  </div>
+            ):(
+               <Button  variant="outlined" size='small' href="/auth"  color="inherit">SignIn</Button> 
 
+            )}
+
+
+
+
+          </div>
         </Toolbar>
       </AppBar>
       <BrowserRouter>
@@ -161,40 +232,32 @@ function ResponsiveDrawer(props) {
               }}
             >
               {drawer}
+
             </Drawer>
+           
           </Hidden>
-          {/* <Hidden mdDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              variant="permanent"
-              open
-            >
-              {drawer}
-            </Drawer>
-          </Hidden> */}
+         
         </nav>
 
         <main className={classes.content}>
+          
         
           <div className={classes.toolbar} />
 
           <Switch>
-            {/* <Route path="/" render={() => <div> Page inbox</div>} /> */}
+            
             <Route Redirect path="/Home"  component={Home} />
             <Route exact path="/Search" component={Search} />
-            <Route exact path="/RentalForm" component={RentalForm} />
-            <Route path="/SignIn"   component={SignIn} />
-          
-            <Route path="/SignUp"  component={SignUp} />
+            <Route exact path="/RentalF" component={RentalF} /> 
+            <Route path="/auth"  component={Auth} />
             <Route path="/ContactUs"  component={ContactUs} />
             <Route path="/Info"  component={Info} />
-            
             <Route path="/RentalDetail"  component={RentalDetail} />
             <Route path="/RentalManage"  component={RentalManage} />
 
+      
           </Switch>
+          {/* <ContactUs/> */}
           <Footer/>
         </main>
       </BrowserRouter>

@@ -1,13 +1,32 @@
 import React from 'react'
 import { Grid, TextField, Button, Card, CardContent, Typography } from '@material-ui/core';
+// import {  } from '@material-ui/styles';
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+
+  contactf:{
+    marginTop:100,
+    marginBottom:100,
+  }
+  
+    }));
+  
+
+
 
 
 export default function ContactUs() {
+  const classes = useStyles();
+
+  
+
+
     return (
-        <div> 
+        <div className={classes.contactf}> 
        
         <Grid>
-          <Card style={{ maxWidth: 450, padding: "20px 5px", margin: "0 auto" }}>
+          <Card style={{ maxWidth: 400, padding: "20px 5px", margin: "0 auto" }} className={classes.controot}>
             <CardContent>
               <Typography gutterBottom variant="h5">
                 Contact Us

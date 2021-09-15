@@ -16,6 +16,13 @@ input:{
     color:theme.palette.text.primary
   },
 
+search:{
+  height:650,
+}
+,
+slider:{
+  width:'200px'
+}
 
 
 }));
@@ -40,19 +47,12 @@ const classes = useStyles();
   };
 
     return (
+      <div className={classes.search}>
         <div className={classes.title}>
             <h1>Search with filter </h1>
             <h5>Cost,Apartment Size View </h5>
 
-            <Typography variant="h5" align="center" color="textSecondary" paragraph className={classes.indet}>
-      <InputBase
-        className={classes.input}
-        placeholder="Search Your NextHome"
-        inputProps={{ 'aria-label': 'search google maps' }}
-      />
-      <IconButton type="submit" className={classes.iconButton} aria-label="search">
-        <SearchIcon />
-      </IconButton>
+            <Typography variant="h5" align="center" color="textSecondary" paragraph className={classes.indet}> 
       <NativeSelect
         //   value={state.name}
         //   onChange={handleChange}
@@ -83,6 +83,17 @@ const classes = useStyles();
             <option value="kevin">Flat</option>
           </optgroup>
         </NativeSelect>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        
+      <InputBase
+        className={classes.input}
+        placeholder="Search Your NextHome"
+        inputProps={{ 'aria-label': 'search google maps' }}
+      />
+      <IconButton type="submit" className={classes.iconButton} aria-label="search">
+        <SearchIcon />
+      </IconButton>
 
  
             </Typography>
@@ -90,7 +101,7 @@ const classes = useStyles();
             <Typography id="non-linear-slider" gutterBottom>
         Price Range
       </Typography>
-      <Slider
+      <Slider className={classes.slider}
         value={value}
         min={0}
         step={0.1}
@@ -103,6 +114,7 @@ const classes = useStyles();
         aria-labelledby="non-linear-slider"
       />
 
+        </div>
         </div>
     )
 }
