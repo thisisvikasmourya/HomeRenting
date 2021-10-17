@@ -37,7 +37,10 @@ export default function Footer() {
           NextHome.com
         </Typography>
         <Typography variant="subtitle1" align="center" color="#fff" component="p">
-          Something here to give the footer a purpose!
+          Everything You Need. All Right Here!.
+        </Typography>
+        <Typography variant="subtitle1" align="center" color="#fff" component="p">
+          Buy New Property!. Sell your Property!. Rent Your Property!.
         </Typography>
     <Copyright/>
       </footer>  

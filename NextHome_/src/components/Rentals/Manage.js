@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import RentalForm from './RentalForm';
 import { useDispatch } from 'react-redux';
 import { getRentals } from '../../actions/rentals';
+import RentalManage from './RentalManage';
 
 const useStyles = makeStyles((theme) => ({
 title:{
@@ -13,7 +14,7 @@ title:{
 
 // {currentId,setCurrentId }
 
-export default function RentalF() {
+export default function CManage() {
     // const [setCurrentId] = useState(null); 
     const dispatch = useDispatch();
 
@@ -26,7 +27,7 @@ export default function RentalF() {
 
 
     return (
-       <RentalForm  />
+       <RentalManage  />
     )
 }
 

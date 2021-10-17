@@ -12,7 +12,17 @@ export const getRentals = async (req,res) =>{
 
     }
 }
+export const getRental = async (req, res) => { 
+    const { id } = req.params;
 
+    try {
+        const rental = await RentalMessage.findById(id);
+        
+        res.status(200).json(rental);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
 export const createRental = async (req,res) => {
     const rental = req.body;
 

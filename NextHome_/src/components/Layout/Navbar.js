@@ -14,12 +14,11 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { Switch, Route, Link, BrowserRouter} from "react-router-dom";
+import { Switch, Route, Link, BrowserRouter,Redirect} from "react-router-dom";
 import Search from "./Search";
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import Button from '@material-ui/core/Button';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
@@ -29,22 +28,18 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import InfoIcon from '@material-ui/icons/Info';
 import Info from "./Info";
 import Home from "./Home";
-// import SignIn from "../login/SignIn";
-// import SignUp from "../register/SignUp";
 import Footer from "./Footer";
 import RentalF from "../Rentals/RentalF";
-import RentalDetail from "../Rentals/RentalDetail";
 import RentalManage from "../Rentals/RentalManage";
 import { useDispatch } from "react-redux";
 import {getRentals} from '../../actions/rentals'
 import { Avatar } from "@material-ui/core";
 import Auth from "../Auth/Auth";
 import { useHistory, useLocation } from 'react-router-dom';
-
-import * as actionType from '../../constants/actionTypes';
-// import { signin, signup } from '../../actions/auth';
-
-
+// import RentalPosts from "../Rentals/RentalPosts";
+import RentalDetail from "../Rentals/RentalDetail";
+import RentalForm from "../Rentals/RentalForm";
+  import CManage from "../Rentals/Manage";
 
 const drawerWidth = 240;
 
@@ -144,6 +139,7 @@ function ResponsiveDrawer(props) {
        
     setUser(null);
   };
+//  const [currentId,setCurrentId] = useEffect(null)
 
   useEffect(()=>{
     dispatch(getRentals());
@@ -156,7 +152,7 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider  />
       <List className={classes.nav}>
-        {[ "Home","Search","RentalF","RentalManage","ContactUs","Info"].map((text, index) => (
+        {[ "Home","Search","CreateRental","Manage","ContactUs","Info"].map((text, index) => (
           <ListItem key={text} component={Link} to={"/" + text}>
             <ListItemIcon>
               {index  === 0 && <HomeIcon />}
@@ -200,7 +196,7 @@ function ResponsiveDrawer(props) {
             {user ? (
                 <div className={classes.profile}>
                   {/* <Avatar className={classes.purple } alt={user.result.imageUrl} >{user.result.name.charAt(0)}</Avatar> */}
-                  <div className={classes.userName} variant="h6">{user.result.name}</div>
+                  <div className={classes.userName} variant="h6" component="p">{user.result.name}</div>
                   <Button  variant="outlined" size='small' color="inherit"  onClick={logout} >Logout</Button>
                   </div>
             ):(
@@ -246,14 +242,25 @@ function ResponsiveDrawer(props) {
 
           <Switch>
             
-            <Route Redirect path="/Home"  component={Home} />
+          <Route path="/" exact component={() => <Redirect to="/rentals" />} />
+          <Route path="/rentals" exact component={Home} />
+          {/* <Route path="/rentals/search" exact component={Home} /> */}
+          <Route path="/rentals/:id" exact component={RentalDetail} />
+          <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/rentals" />)} />
+
+
+            <Route path="/Home"  component={Home} />
             <Route exact path="/Search" component={Search} />
-            <Route exact path="/RentalF" component={RentalF} /> 
+            <Route exact path="/CreateRental" component={() => (!user ? <Auth /> : <Redirect to="/RentalForm" />)} /> 
             <Route path="/auth"  component={Auth} />
             <Route path="/ContactUs"  component={ContactUs} />
             <Route path="/Info"  component={Info} />
-            <Route path="/RentalDetail"  component={RentalDetail} />
-            <Route path="/RentalManage"  component={RentalManage} />
+            {/* <Route path="/RentalDetail"  component={RentalDetail} /> */}
+           
+            {/* <Route exact path="/Manage"   /> */}
+            <Route  path="/RentalForm"  component={RentalForm} />
+             <Route path="/Manage"  component={() => (!user ? <Auth /> : <Redirect to="/CManage" />)} />
+             <Route path="/CManage"  component={RentalManage} />
 
       
           </Switch>
@@ -274,5 +281,7 @@ ResponsiveDrawer.propTypes = {
     typeof Element === "undefined" ? Object : Element
   )
 };
+
+
 
 export default ResponsiveDrawer;

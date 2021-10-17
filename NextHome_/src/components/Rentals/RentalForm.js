@@ -14,10 +14,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import {createRental,updateRental } from '../../actions/rentals'
 import { useSelector } from 'react-redux';
-
+// import { Paper } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
 form:{
   padding:40,
+},
+paper:{
+padding:20
 }
 
 }));
@@ -71,7 +74,7 @@ const  RentalForm =( {currentId,setCurrentId })=> {
     <React.Fragment>
       
         <Container maxWidth="sm">
-        
+      <Paper className={classes.paper}>  
    <form autoComplete="off" noValidate onSubmit={handleSubmit} className={classes.form} >
 
       <Typography variant="h6" gutterBottom>
@@ -154,6 +157,7 @@ const  RentalForm =( {currentId,setCurrentId })=> {
         </Grid>
       </Grid>
       </form>
+      </Paper>
       </Container>
       
     </React.Fragment>

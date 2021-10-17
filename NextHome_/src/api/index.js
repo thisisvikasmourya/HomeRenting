@@ -13,12 +13,14 @@ return req;
   
 });
 
+export const fetchrental = (id) => API.get(`/rentals/${id}`);
 
 
 export const fetchRentals = () => API.get('/rentals');
 export const createRental = (newRental) => API.post('/rentals',newRental);
 export const updateRental = (id,updatedRental) => API.patch(`/rentals/${id}`,updatedRental);
 
+export const likePost = (id) => API.patch(`/rentals/${id}/likePost`);
 
 
 export const signIn = (formData) => API.post('/user/signin', formData)

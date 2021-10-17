@@ -1,11 +1,12 @@
 import express  from "express";
-import { getRentals, createRental,updateRental} from '../controllers/rentals.js'
+import { getRentals,getRental, createRental,updateRental} from '../controllers/rentals.js'
 import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
 
 router.get('/', getRentals);
+router.get('/:id', getRental);
 router.post('/',auth, createRental);
 router.patch('/:id',auth, updateRental);
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import {CircularProgress, Grid } from '@material-ui/core';
+import {CircularProgress, Container, Grid } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import Rentalpost from './Rentalpost';
 
@@ -31,15 +31,15 @@ export default function RentalManage() {
         <div className={classes.title}>
             <h1>Your rental Property</h1>
             {/* <h1>Nothing to Show</h1> */}
-
-        <Grid className={classes.container}   alignItems="stretch"   >
+<Container>
+        <Grid container spacing={4} className={classes.card}  >
           {rentals.map((rental) => (
-            <Grid key={rental._id} className={classes.box} item  >
+            <Grid key={rental._id} className={classes.box} item  md={4} >
               <Rentalpost rental={rental}  />
               </Grid>
           ))};
         </Grid>
-      
+      </Container>
 
 
 
