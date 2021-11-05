@@ -20,7 +20,7 @@ export default function Info() {
         <div className={classes.infocss}>
         <div className={classes.title}>
          <h1>About NextHome Website</h1>   
-         <p></p>
+         
         </div>
         </div>
     )

@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   
   mainContainer: {
-    borderRadius: 15,
+    borderRadius: 2,
     margin: '30px 0',
     display: 'flex',
     flexDirection: 'row',

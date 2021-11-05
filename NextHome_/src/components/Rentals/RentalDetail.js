@@ -6,6 +6,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { getrental } from '../../actions/rentals';
+import RentalAsset from './RentalAsset';
 // import useStyles from './styles';
 const useStyles = makeStyles((theme) => ({
 
@@ -90,8 +91,12 @@ const RentalDetail = () => {
           <Typography gutterBottom variant="body1" component="p">{rental.address}</Typography>
           <Typography gutterBottom variant="body1" component="p">{rental.rentaltype}</Typography>
           <Typography gutterBottom variant="body1" component="p">Contact : 12345678909</Typography>
+          <Typography gutterBottom variant="body1" component="p">Buy / Rent</Typography>
           
-          <Typography variant="h6">Feature : </Typography>
+          <Typography variant="h6">Feature :
+          
+          <RentalAsset/>
+           </Typography>
 
           <Typography variant="body1">{moment(rental.createdAt).fromNow()}</Typography>
           <Divider style={{ margin: '20px 0' }} />
