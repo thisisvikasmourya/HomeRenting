@@ -14,13 +14,13 @@ import Input from './Input';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
-const Auth = () => {
+function Auth() {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
-  const [formData , setFormData] = useState(initialState);
+  const [formData, setFormData] = useState(initialState);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
@@ -34,7 +34,7 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formData)
+    console.log(formData);
 
     if (isSignup) {
       dispatch(signup(formData, history));
@@ -49,41 +49,41 @@ const Auth = () => {
 
     try {
       dispatch({ type: actionType.AUTH, data: { result, token } });
+      history.push('/');
 
-      history.push('/Home');
     } catch (error) {
       console.log(error);
     }
   };
 
-const handleChange =(e)=>{
-      setFormData({...formData,[e.target.name]: e.target.value});
-};
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
 
-  
+
   return (
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
+        <Typography component="h1" variant="h5">{isSignup ? 'Sign up' : 'Sign in'}</Typography>
         <form className={classes.form} onSubmit={handleSubmit} gutterBottom>
           <Grid container spacing={2}>
-            { isSignup && (
-            <>
-              <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
-              <Input name="lastName" label="Last Name" handleChange={handleChange} half />
-            </>
+            {isSignup && (
+              <>
+                <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
+                <Input name="lastName" label="Last Name" handleChange={handleChange} half />
+              </>
             )}
             <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
             <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
-            { isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" /> }
+            {isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
           </Grid>
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-            { isSignup ? 'Sign Up' : 'Sign In' }
+            {isSignup ? 'Sign Up' : 'Sign In'}
           </Button>
           <GoogleLogin
             clientId="142383862728-hotdbqictsq9v6cp7qnn2rs4kpr5310t.apps.googleusercontent.com"
@@ -94,12 +94,11 @@ const handleChange =(e)=>{
             )}
             onSuccess={googleSuccess}
             onFailure={googleError}
-            cookiePolicy="single_host_origin"
-          />
+            cookiePolicy="single_host_origin" />
           <Grid container justify="flex-end" gutterBottom>
             <Grid item>
               <Button onClick={switchMode}>
-                { isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }
+                {isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up"}
               </Button>
             </Grid>
           </Grid>
@@ -107,6 +106,6 @@ const handleChange =(e)=>{
       </Paper>
     </Container>
   );
-};
+}
 
 export default Auth;

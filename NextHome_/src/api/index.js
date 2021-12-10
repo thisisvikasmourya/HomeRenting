@@ -14,7 +14,7 @@ return req;
 });
 
 export const fetchrental = (id) => API.get(`/rentals/${id}`);
-
+export const fetchRentalsBySearch = (searchQuery) => API.get(`/rentals/search?searchQuery=${searchQuery.search || 'none'}`)
 
 export const fetchRentals = () => API.get('/rentals');
 export const createRental = (newRental) => API.post('/rentals',newRental);

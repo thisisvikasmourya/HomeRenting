@@ -39,7 +39,15 @@ import { useHistory, useLocation } from 'react-router-dom';
 // import RentalPosts from "../Rentals/RentalPosts";
 import RentalDetail from "../Rentals/RentalDetail";
 import RentalForm from "../Rentals/RentalForm";
-  import CManage from "../Rentals/Manage";
+import CManage from "../Rentals/Manage";
+import decode from "jwt-decode";
+import UserProfile from "./UserProfile";
+import * as actionType from '../../constants/actionTypes'
+import PaintService from "../Rentals/RentalService/PaintService";
+import FurnService from "../Rentals/RentalService/FurnService";
+import CleanService from "../Rentals/RentalService/CleanService";
+import PacketService from "../Rentals/RentalService/PacketService";
+
 
 const drawerWidth = 240;
 
@@ -108,6 +116,9 @@ const useStyles = makeStyles(theme => ({
     
 }));
 
+
+
+
 function ResponsiveDrawer(props) {
 
   
@@ -116,8 +127,7 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [Open, setOpen] = React.useState(false);
-  const history = useHistory();
-  // const location = useLocation();
+  let history = useHistory();
 
 
   const handleDrawerToggle = () => {
@@ -129,16 +139,23 @@ function ResponsiveDrawer(props) {
   
   useEffect(() => {
     const token = user?.token;
+
+    if(token){
+  const decodedToken = decode(token);
+
+  if(decodedToken.exp * 1000 < new Date().getTime()) logout();
+}
+
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, []);
 
 
+ const logout = () => {
+    dispatch({ type : actionType.LOGOUT});  
 
-  const logout = () => {
-    localStorage.clear();
-       
     setUser(null);
   };
+  
 //  const [currentId,setCurrentId] = useEffect(null)
 
   useEffect(()=>{
@@ -195,12 +212,14 @@ function ResponsiveDrawer(props) {
          <div className={classes.profile}>
             {user ? (
                 <div className={classes.profile}>
-                  {/* <Avatar className={classes.purple } alt={user.result.imageUrl} >{user.result.name.charAt(0)}</Avatar> */}
-                  <div className={classes.userName} variant="h6" component="p">{user.result.name}</div>
+                  <Button href="/UserProfile"> 
+                <Avatar className={classes.purple } alt={user.result.imageUrl} >{user.result.name.charAt(0)}</Avatar> </Button>
+                  { /* <div className={classes.userName} variant="h6" component="p">{user.result.name}</div>*/}
+                  &nbsp;&nbsp;
                   <Button  variant="outlined" size='small' color="inherit"  onClick={logout} >Logout</Button>
                   </div>
             ):(
-               <Button  variant="outlined" size='small' href="/auth"  color="inherit">SignIn</Button> 
+               <Button  variant="outlined" size='small' href="/auth"  color="inherit">Sign In</Button> 
 
             )}
 
@@ -244,11 +263,9 @@ function ResponsiveDrawer(props) {
             
           <Route path="/" exact component={() => <Redirect to="/rentals" />} />
           <Route path="/rentals" exact component={Home} />
-          {/* <Route path="/rentals/search" exact component={Home} /> */}
+      
           <Route path="/rentals/:id" exact component={RentalDetail} />
           <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/rentals" />)} />
-
-
             <Route path="/Home"  component={Home} />
             <Route exact path="/Search" component={Search} />
             <Route exact path="/CreateRental" component={() => (!user ? <Auth /> : <Redirect to="/RentalForm" />)} /> 
@@ -256,13 +273,14 @@ function ResponsiveDrawer(props) {
             <Route path="/ContactUs"  component={ContactUs} />
             <Route path="/Info"  component={Info} />
             {/* <Route path="/RentalDetail"  component={RentalDetail} /> */}
-           
-            {/* <Route exact path="/Manage"   /> */}
             <Route  path="/RentalForm"  component={RentalForm} />
              <Route path="/Manage"  component={() => (!user ? <Auth /> : <Redirect to="/CManage" />)} />
              <Route path="/CManage"  component={RentalManage} />
-
-      
+              <Route path="UserProfile" component={UserProfile} />
+      <Route path="/paintService" component={PaintService} />
+      <Route path="/furnService" component={FurnService} />
+      <Route path="/cleanService" component={CleanService} />
+      <Route path="/ElectricalService" component={PacketService} />
           </Switch>
           {/* <ContactUs/> */}
           <Footer/>

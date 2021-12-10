@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core/';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-
+// import { Link } from 'react-router-dom';
 import { getrental } from '../../actions/rentals';
 import RentalAsset from './RentalAsset';
 // import useStyles from './styles';
@@ -82,7 +82,9 @@ const RentalDetail = () => {
   // const recommendedrentals = rentals.filter(({ _id }) => _id !== rental._id);
 
   return (
+    
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
+    <Link to={`/rentals`}>Home</Link>
       <div className={classes.card}>
         <div className={classes.section}>
           <Typography variant="h3" component="h2">{rental.title}</Typography>

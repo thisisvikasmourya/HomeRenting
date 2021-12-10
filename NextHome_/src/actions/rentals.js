@@ -1,3 +1,4 @@
+
 import * as api from '../api/index.js';
 
 
@@ -13,6 +14,18 @@ export const getRentals = () => async(dispatch)=> {
     }
     
 };
+
+export const getRentalsBySearch = (searchQuery) => async(dispatch) => {
+  try {
+    const {data : { data }}  = await api.fetchRentalsBySearch(searchQuery);
+            dispatch ({type: 'FETCH_BY_SEARCH', payload: data });
+
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+
 
 export const createRental = (rental) => async (dispatch) => {
     try {
@@ -61,5 +74,4 @@ export const getrental = (id) => async (dispatch) => {
     console.log(error);
   }
 };
-
 

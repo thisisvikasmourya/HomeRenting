@@ -113,7 +113,7 @@ const openRental =()=> history.push(`/rentals/${rental._id}`)
                  
       </CardContent>
               </a>
-
+   
       <CardActions className={classes.cardActions}>
         <Button size="small" color="primary" ><ThumbUpAltIcon fontSize="small" /> Like  </Button>
         <Button size="small" color="primary" > Buy</Button>
@@ -128,8 +128,6 @@ const openRental =()=> history.push(`/rentals/${rental._id}`)
 
         </Container>
 
-
-          
 
         </React.Fragment>
     )

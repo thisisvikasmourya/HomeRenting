@@ -4,7 +4,9 @@ export default (rentals = [] ,action) => {
     switch (action.type) {
         case 'FETCH_ALL':
             return action.payload;
-        
+        case 'FETCH_BY_SEARCH':
+            return action.payload;
+
         case 'CREATE':
             return [...rentals , action.payload];
         case FETCH_RENTAL:

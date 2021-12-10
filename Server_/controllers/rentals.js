@@ -23,6 +23,20 @@ export const getRental = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }
+
+export const getRentalsBySearch = async(req,res) =>{
+   const { searchQuery} = res.query
+    try {
+        const title = new RegExp(searchQuery,'i');
+        const rentals = await RentalMessage.find({$or:[{title}]});
+         res.json({data:rentals});
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+
+
 export const createRental = async (req,res) => {
     const rental = req.body;
 

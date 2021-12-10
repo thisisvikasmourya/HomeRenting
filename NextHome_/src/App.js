@@ -1,5 +1,5 @@
 
-// import './App.css';
+import './App.css';
 import React,{useEffect} from 'react';
 import Navbar from './components/Layout/Navbar'
 import { CssBaseline } from '@material-ui/core';
