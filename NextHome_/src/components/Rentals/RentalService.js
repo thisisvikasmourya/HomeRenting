@@ -112,7 +112,7 @@ const classes = useStyles();
                       Cleaning Services
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the content.
+                     Make your house look like new. Spot free cleaning at lowest prices
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -135,7 +135,7 @@ const classes = useStyles();
                       Furniture Services
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the content.
+                     Book your consultation to get accurate quote.
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -158,7 +158,7 @@ const classes = useStyles();
                     Electrical Services
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the content.
+                      Get lowest prices for electrician services in Mumbai
                     </Typography>
                   </CardContent>
                   <CardActions>

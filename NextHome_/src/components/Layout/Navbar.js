@@ -103,7 +103,7 @@ const useStyles = makeStyles(theme => ({
     profile: {
       display: 'flex',
       // justifyContent: 'space-between',
-      width: '160px',
+      width: '200px',
     },
     userName: {
       display: 'flex',
@@ -214,7 +214,7 @@ function ResponsiveDrawer(props) {
                 <div className={classes.profile}>
                   <Button href="/UserProfile"> 
                 <Avatar className={classes.purple } alt={user.result.imageUrl} >{user.result.name.charAt(0)}</Avatar> </Button>
-                  { /* <div className={classes.userName} variant="h6" component="p">{user.result.name}</div>*/}
+                   <div className={classes.userName} variant="h6" component="p">{user.result.name}</div>
                   &nbsp;&nbsp;
                   <Button  variant="outlined" size='small' color="inherit"  onClick={logout} >Logout</Button>
                   </div>

@@ -2,45 +2,41 @@ import React from 'react'
 import { Carousel } from 'react-carousel-minimal';
 import { Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom'
+import ServiceAsset from './ServiceAsset';
+
 export default function PaintService() {
 
 const data = [
     {
-      image: "https://media.istockphoto.com/photos/bacteriai-will-hunt-you-down-and-i-will-exterminate-you-picture-id1291195956?b=1&k=20&m=1291195956&s=170667a&w=0&h=A9vBTKzU0xJXxyBKeKVhHh-ESSwt1NOZArZ_lazjjh4=",
-      caption: "San Francisco"
+      image: "https://paintmywalls.in/wp-content/uploads/2020/12/Expert-PAinters.jpg",
+      // caption: "San Francisco"
     },
     {
-      image: "https://media.istockphoto.com/photos/businessman-cleans-conference-table-during-covid19-pandemic-picture-id1255371700?b=1&k=20&m=1255371700&s=170667a&w=0&h=qTrjuDj-tvbeVjsGf9MV6wMAsa5xu1FjJL5b1U93TDw=",
-      caption: "Scotland"
+      image: "https://content.jdmagicbox.com/comp/def_content/painting-contractors-for-residential/shutterstock-562143490-painting-contractors-for-residential-13-e1om4.jpg?clr="
+      ,
+      // caption: "Scotland"
     },
     {
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHpSzjhySPzdSJoYegVKcHf_8A_acbc4_exRYwDnlL9FqM74gTp9xu5MQmxIct8LxaY1I&usqp=CAU",
-      caption: "Darjeeling"
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsztS5bMAYs_cV2XmpFrUOCBaWWhjlT_DV3w&usqp=CAU",
+      // caption: "Darjeeling"
     },
     {
-      image: "https://media.istockphoto.com/photos/maid-working-at-a-hotel-wearing-a-protective-face-mask-while-and-picture-id1298333940?b=1&k=20&m=1298333940&s=170667a&w=0&h=ANJ6qIR5TG3VG8vPzWL99ofjqyDmdZNclCBSSqndyCw=",
-      caption: "San Francisco"
+      image: "https://www.wow1day.com/sites/default/files/beanslide/W1D_HeroImage_Commercial.jpg",
+      // caption: "San Francisco"
     },
     {
-      image: "https://media.istockphoto.com/photos/man-wearing-gloves-and-a-mask-wipes-the-buttons-and-handrail-of-the-picture-id1316203954?b=1&k=20&m=1316203954&s=170667a&w=0&h=C1yXefBejDNTGacsIMEJ1YJRF-mJPe5mYqoZ-PJ4bgE=",
-      caption: "Scotland"
+      image: "https://worldestimating.com/wp-content/uploads/2019/12/interior-finshes.jpg",
+      // caption: "Scotland"
     },
     {
-      image: "https://media.istockphoto.com/photos/steam-cleaning-carpets-picture-id168614932?b=1&k=20&m=168614932&s=170667a&w=0&h=MOFm4a9cB1Sa0qkLrwHPJrsGstkMmS7DMYhw7ddYI6o=",
-      caption: "Darjeeling"
+      image: "https://budgetpainters.ca/wp-content/uploads/2021/03/Interior-Painting-Contractors.jpg",
+      // caption: "Darjeeling"
     },
     {
-      image: "https://www.usnews.com/dims4/USNEWS/01cc624/2147483647/thumbnail/640x420/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2Fe4%2Fd5%2F43a0ac914af7abefa6704b41eb54%2F160307-cleaningservices-stock.jpg",
-      caption: "San Francisco"
+      image: "https://5.imimg.com/data5/XL/GR/MY-4613803/painting-services-500x500.jpg",
+      // caption: "San Francisco"
     },
-    {
-      image: "http://dcpost.org/wp-content/uploads/2021/06/Clean-World-Services-How-are-Professional-Home-Cleaning-Services-Beneficial.jpg",
-      caption: "Scotland"
-    },
-    {
-      image: "https://2greenchicks.com/wp-content/uploads/2017/11/shutterstock_657213997.jpg",
-      caption: "Darjeeling"
-    }
+    
   ];
 
   const captionStyle = {
@@ -111,6 +107,9 @@ const data = [
         </center>
     <h4>
     Contact Us : +912387568072</h4>
+      </div>
+      <div>
+      <ServiceAsset/>
       </div>
       </Grid>
 
